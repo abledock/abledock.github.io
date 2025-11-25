@@ -4,69 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Where Code Meets Chaos</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-  </style>
+  <link rel="icon" type="image/x-icon" href="assets/img/favicons/favicon.ico" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <canvas id="ripples"></canvas>
-
-  <script>
-    const rippleCanvas = document.getElementById("ripples");
-    const rctx = rippleCanvas.getContext("2d");
-    let w, h;
-
-    function resize() {
-      w = rippleCanvas.width = window.innerWidth;
-      h = rippleCanvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    /* Clean Cursor Ripple Effect */
-    let ripples = [];
-
-    window.addEventListener("mousemove", (e) => {
-      ripples.push({ x: e.clientX, y: e.clientY, r: 0 });
-    });
-
-    function drawRipples() {
-      rctx.clearRect(0, 0, w, h);
-
-      ripples.forEach((rp) => {
-        rp.r += 2.2;
-        rctx.beginPath();
-        rctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
-        rctx.strokeStyle = `hsl(${(rp.r * 2) % 360}, 90%, 60%)`;
-        rctx.globalAlpha = Math.max(0, 0.35 - rp.r / 260);
-        rctx.lineWidth = 3;
-        rctx.stroke();
-      });
-
-      ripples = ripples.filter((rp) => rp.r < 260);
-    }
-
-    function animate() {
-      drawRipples();
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  </script>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
